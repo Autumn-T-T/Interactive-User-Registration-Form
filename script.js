@@ -10,6 +10,12 @@ const emailError = document.getElementById("emailError");
 const passwordError = document.getElementById("passwordError");
 const confirmPasswordError = document.getElementById("confirmPasswordError");
 
+
+const savedUsername = localStorage.getItem("username");
+if (savedUsername) {
+  username.value = savedUsername;
+}
+
 function showError(span, message) {
   span.textContent = message;
 }
@@ -88,6 +94,9 @@ form.addEventListener("submit", function(event) {
   const validConfirm = validateConfirmPassword();
 
   if (validUsername && validEmail && validPassword && validConfirm) {
-    alert("All fields are valid! Registration successful.");
+    localStorage.setItem("username", username.value);
+    alert("Registration successful! Username saved.");
+    form.reset();
+    username.value = localStorage.getItem("username");
   }
 });
